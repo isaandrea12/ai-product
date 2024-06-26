@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: Apache-2.0
 
-function App() {
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import LoginPage from './components/Login';
+import HomePage from './components/Home';
+import ConfirmUserPage from './confirmUser';
+import './App.css'
+
+const App = () => {
+  const isAuthenticated = () => {
+    const accessToken = sessionStorage.getItem('accessToken');
+    return !!accessToken;
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={isAuthenticated() ? <Navigate replace to="/home" /> : <Navigate replace to="/login" />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/confirm" element={<ConfirmUserPage />} />
+        <Route path="/home" element={isAuthenticated() ? <HomePage /> : <Navigate replace to="/login" />} />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
