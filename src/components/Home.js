@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { useNavigate } from 'react-router-dom';
+import Form from './Form';
 
 /*eslint-disable*/
 function parseJwt (token) {
@@ -34,9 +35,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <h1>Hello World</h1>
-      <p>See console log for Amazon Cognito user tokens.</p>
-      <button onClick={handleLogout}>Logout</button>
+      <Form/>
     </div>
   );
 };
