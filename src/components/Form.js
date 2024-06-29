@@ -13,7 +13,8 @@ const InterviewForm = () => {
   });
 
   const [interviewData, setInterviewData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // State to manage loading state
+  const [showAnswers, setShowAnswers] = useState(false); // State to manage showing answers
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,8 +31,17 @@ const InterviewForm = () => {
     } catch (error) {
       console.error('Error generating interview questions:', error);
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); 
+      setShowAnswers(false); 
     }
+  };
+
+  const handleShowAnswers = () => {
+    setShowAnswers(true);
+  };
+
+  const toggleShowAnswers = () => {
+    setShowAnswers(!showAnswers); 
   };
 
   return (
@@ -82,18 +92,23 @@ const InterviewForm = () => {
               <option key={index} value={level}>{level}</option>
             ))}
           </select>
-          <button type="submit" className="btn btn-primary w-full mt-10">Generate Questions</button>
-          {isLoading ? <span className="loading loading-spinner loading-md"></span> : ""}
         </div>
-        
+        <button type="submit" className="btn btn-primary w-full">Generate Questions</button>
       </form>
+      {isLoading && <span className="loading loading-spinner loading-md"></span>}
       {interviewData && (
         <div className="mt-8">
           <h2 className="text-2xl font-semibold mb-4">Interview Questions and Answers</h2>
           {interviewData.questions.map((q, index) => (
             <div key={index} className="mb-4">
               <p className="font-medium mb-2"><strong>Question:</strong> {q.question}</p>
-              <button className="btn btn-primary">Show Answer</button>
+              {showAnswers && <p><strong>Answer:</strong> {q.answer}</p>}
+              <button
+                className="btn btn-secondary mt-2"
+                onClick={toggleShowAnswers}
+              >
+                {showAnswers ? "Hide Answer" : "Show Answer"}
+              </button>
             </div>
           ))}
         </div>

@@ -54,62 +54,83 @@ const LoginPage = () => {
         <h1 className="text-3xl font-bold mb-8 text-center">Welcome</h1>
         <h4 className="text-lg mb-4 text-center">{isSignUp ? 'Sign up to create an account' : 'Sign in to your account'}</h4>
         <form onSubmit={isSignUp ? handleSignUp : handleSignIn} className="space-y-4">
-          <div>
-            <input
-              className="input input-bordered w-full"
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
-              required
-            />
-          </div>
-          <div>
-            <input
-              className="input input-bordered w-full"
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-              required
-            />
-          </div>
-          <div>
-            <input
-              className="input input-bordered w-full"
-              id="name"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Name"
-              required
-            />
-          </div>
-          <div>
-            <input
-              className="input input-bordered w-full"
-              id="phone"
-              type="text"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="Phone"
-              required
-            />
-          </div>
           {isSignUp && (
-            <div>
-              <input
-                className="input input-bordered w-full"
-                id="confirmPassword"
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Confirm Password"
-                required
-              />
-            </div>
+            <>
+              <div>
+                <input
+                  className="input input-bordered w-full"
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Name"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+              <div>
+                <input
+                  className="input input-bordered w-full"
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Email"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+              <div>
+                <input
+                  className="input input-bordered w-full"
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Password"
+                  autocomplete="password"
+                  required
+                />
+              </div>
+              <div>
+                <input
+                  className="input input-bordered w-full"
+                  id="confirmPassword"
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Confirm Password"
+                  autocomplete="confirmPassword"
+                  required
+                />
+              </div>
+            </>
+          )}
+          {!isSignUp && (
+            <>
+              <div>
+                <input
+                  className="input input-bordered w-full"
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Email"
+                  required
+                />
+              </div>
+              <div>
+                <input
+                  className="input input-bordered w-full"
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Password"
+                  required
+                />
+              </div>
+            </>
           )}
           <button type="submit" className="btn btn-primary w-full">
             {isSignUp ? 'Sign Up' : 'Sign In'}
